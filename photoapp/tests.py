@@ -1,63 +1,68 @@
 from django.test import TestCase
 
 from .models import *
-#instead of importing items/classes one by one use * to import everything
-class TestImage(TestCase):
+# Create your tests here.
+
+class ImageTest(TestCase):
+
     # def class instance setup for the project
     def setUp(self):
-        self.diani = Location.objects.create(name='Diani')
-        self.sports = Category.objects.create(name='sports')
-        self.logos = Category.objects.create(name='logos')
+        self.nairobi = Location.objects.create(name='Nairobi')
+        self.fun = categories.objects.create(name='fun')
+        self.music = categories.objects.create(name='music')
 
-        self.office = Image.objects.create(
-            name='office', location=self.diani,  description='an office picture')
+        self.drinks = Image.objects.create(
+            name='drinks', location=self.nairobi,  description='picture of a drinks')
 
-        self.office.category.add(self.sports)
-        self.office.category.add(self.logos)
+        self.drinks.categories.add(self.fun)
+        self.drinks.categories.add(self.music)
 
-    # def a testcase for instance of the office class object
+    # def a testcase for instance of the drinks class
     def test_instance(self):
-        self.office.save()
-        self.assertTrue(isinstance(self.office, Image))
+        self.drinks.save()
+        self.assertTrue(isinstance(self.drinks, Image))
 
     def test_delete_image(self):
-        self.office.save()
-        self.office.delete()
+        self.drinks.save()
+        self.drinks.delete()
         self.assertTrue(len(Image.objects.all()) == 0)
 
     def test_update(self):
-        self.office.save()
-        self.office.name = 'update_office'
-        self.assertTrue(self.office.name == 'update_office')
+        self.drinks.save()
+        self.drinks.name = 'MoreDrinks'
+        self.assertTrue(self.drinks.name == 'MoreDrinks')
 
     def test_all_images(self):
-        self.office.save()
+        self.drinks.save()
         images = Image.all_images()
         self.assertTrue(len(images) > 0)
 
-    def test_show_by_category(self):
-        self.office.save()
-        cat = Category.objects.filter(name='sports')
-        images = Image.show_by_category(cat)
+    def test_search_by_category(self):
+        self.drinks.save()
+        images = Image.search_by_category('fun')
         self.assertTrue(len(images) > 0)
 
     def test_view_location(self):
-        self.office.save()
-        location = Image.show_by_location(self.diani)
+        self.drinks.save()
+        location = Image.view_location(self.nairobi)
         self.assertTrue(len(location) > 0)
 
-class TestCategories (TestCase):
+    def test_view_category(self):
+        self.drinks.save()
+        categories = Image.view_category(self.music)
+        self.assertTrue(len(categories) > 0)
+
+class categoriesTest(TestCase):
     def setUp(self):
-        self.nature = Category(name='beach')
+        self.nature = categories(name='nature')
 
     def test_instance(self):
         self.nature.save()
-        self.assertTrue(isinstance(self.nature, Category))
+        self.assertTrue(isinstance(self.nature, categories))
 
-#  test Location class
-class TestLocation (TestCase):
+class LocationTest(TestCase):
     def setUp(self):
-        self.nairobi = Location(name='Nairobi')
+        self.nairobi = Location(name='nairobi')
 
     def test_instance(self):
         self.nairobi.save()
