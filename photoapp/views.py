@@ -9,7 +9,7 @@ def home(request):
 
     if 'location' in request.GET and request.GET['location']:
         name = request.GET.get('location')
-        images = Image.view_location(name)
+        images = Image.show_by_location(name)
 
     elif 'category' in request.GET and request.GET['category']:
         cat = request.GET.get('categories')
