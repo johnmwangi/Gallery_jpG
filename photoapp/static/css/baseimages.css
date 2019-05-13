@@ -22,7 +22,7 @@ p, h5 {
 
   font-family: 'Abel', sans-serif;
   font-size: 19px;
-  background-image: url('/static/img/liverpool.jpg');
+  /* background-image: url('/static/img/liverpool.jpg'); */
   background-repeat: repeat-x;
 
 }
@@ -30,13 +30,13 @@ p, h5 {
 body{
   background-image: url('/static/img/black.jpg');
   z-index: 0;
-  /* background-color: rgba(255, 255, 255, 0.4); */
+  background-color: black;
   background-blend-mode: lighten;
 
 }
 
 .modal-content {
-  background-color:black;
+  background-color: rgba(255,0,255,0.7;
   text-decoration-color: white;
 
 }
