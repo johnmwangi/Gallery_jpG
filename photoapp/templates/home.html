@@ -1,49 +1,28 @@
 {%extends 'base.html'%}
-
+{% load bootstrap4 %}
 {% block content %}
 {{block.super}}
 
-<div class="container-fluid">
-  <div class="row">
-    {%for image in images%}
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
+<br>
+<br>
+<div class="container">
 
-          <a   data-toggle="modal" data-target="#{{image.name}}  "><img class="img-fluid" src="{{image.image.url}}" alt="imag"></a>
-          <p>{{image.name}}</p>
+  <div class="card-columns">
 
-
-        </div>
-
-      </div>
-      <!-- Button trigger modal -->
-<!-- Modal -->
-<div class="modal fade" id="{{image.name}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img class="img-fluid"src="{{image.image.url}}" alt="">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+    <div class="card border-secondary">
+      <img class="card-img-top" class="img-responsive" src="{{image.gallery_image.url}}" data-target="#extraModal{{image.id}}" data-toggle="modal" size="100px200">
     </div>
-  </div>
-</div>
+    <div class="card-body">
+      <p>Name: {{image.name}}</p>
+      <p>About: {{image.description}}</p>
+      <p>Location: {{image.location}}</p>
 
+      {% for category in image.categories.all %}
+      <p> Category: {{ category.name }} </p>
+      {% endfor %}
     </div>
-      {%endfor%}
 
   </div>
 
 </div>
-
 {% endblock %}
