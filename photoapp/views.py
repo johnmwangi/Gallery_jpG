@@ -5,7 +5,7 @@ from .models import *
 def home(request):
     images = Image.objects.all()
     location = Location.objects.all()
-    category = categories.objects.all()
+    category = Category.objects.all()
 
     if 'location' in request.GET and request.GET['location']:
         name = request.GET.get('location')
@@ -16,13 +16,13 @@ def home(request):
         images = Image.view_category(cat)
         return render(request, 'all-images.html', {"name":name,"images":images,"cat":cat })
 
-    return render(request,"all-images.html",{"images":images,"location":location,"category":category})
+    return render(request,"home.html",{"images":images,"location":location,"category":category})
 
 def search_results(request):
 
     if 'categories' in request.GET and request.GET['categories']:
         search_images = request.GET.get("categories")
-        searched_images = Image.search_by_category(search_images)
+        searched_images = Image.search_by_name(search_images)
         message = f"{search_images}"
 
         return render(request, 'search.html',{"message":message,"images": searched_images})
