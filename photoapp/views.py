@@ -1,68 +1,39 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import  *
-
+from django.http  import HttpResponse,Http404,HttpResponseRedirect
+from .models import *
 # Create your views here.
-def show_categories(request):
-    # categories=Category.all_categories()
-    locations = Location.objects.all()
+def home(request):
+    images = Image.objects.all()
+    location = Location.objects.all()
+    category = categories.objects.all()
 
+    if 'location' in request.GET and request.GET['location']:
+        name = request.GET.get('location')
+        images = Image.view_location(name)
 
-    categories = Category.objects.all()
-    images = Image.all_images()
-    # imagescategory = Image.show_by_category(category=ca)
-    if request.GET.get("category"):
-        images = Image.show_by_category(request.GET.get("category"))
-    elif request.GET.get("location"):
-        images = Image.show_by_location(request.GET.get("location"))
+    elif 'category' in request.GET and request.GET['category']:
+        cat = request.GET.get('categories')
+        images = Image.view_category(cat)
+        return render(request, 'all-images.html', {"name":name,"images":images,"cat":cat })
 
-    else:
-        images= Image.all_images()
-
-
-
-    # images = Image.objects.all()
-    #
-    # if request.GET.get("category")):
-    #     images = Image.filter_by_category(request.GET.get("category"))
-
-    return render(request, 'welcome.html', {"categories":categories, "locations":locations,"images":images })
-
-#
-# def images(request):
-#     images=Image.all_images()
-#     return render (request, 'images/homepage.html', {"images":images})
-
+    return render(request,"all-images.html",{"images":images,"location":location,"category":category})
 
 def search_results(request):
 
-    if 'image' in request.GET and request.GET["image"]:
-        search_term = request.GET.get("image")
-        image_results = Image.search_by_name(search_term)
-        message = f"{search_term}"
+    if 'categories' in request.GET and request.GET['categories']:
+        search_images = request.GET.get("categories")
+        searched_images = Image.search_by_category(search_images)
+        message = f"{search_images}"
 
-        return render(request, 'search.html',{"message":message,"images": image_results})
+        return render(request, 'search.html',{"message":message,"images": searched_images})
 
     else:
-        message = "Please enter a search term"
+        message = "You haven't searched for any image"
         return render(request, 'search.html',{"message":message})
 
-# Create your views here.
-def show_locations(request):
-    # categories=Category.all_categories()
-    locations = Location.objects.all()
-    images = Image.all_images()
-    # imagescategory = Image.show_by_category(category=ca)
-    if request.GET.get("location"):
-        images = Image.show_by_location(request.GET.get("location"))
-    else:
-        images= Image.all_images()
-    # images = Image.objects.all()
-    #
-    # if request.GET.get("category")):
-    #     images = Image.filter_by_category(request.GET.get("category"))
-    return render(request, 'homepage.html', {"locations":locations, "images":images })
-def my_locations(request):
-    locations=Location.objects.all()
-    images = Image.all_images()
-    return render(request, 'homepage.html', {"locations":locations, "images":images })
+def get_image_by_id(request,image_id):
+    try:
+        image = Image.objects.get(id = image_id)
+    except DoesNotExist:
+        raise Http404()
+    return render(request,"image.html", {"image":image})
