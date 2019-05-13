@@ -1,4 +1,4 @@
-# Emdee's Gallery
+# Straightoutta Gallery
 
 
 ## Built By [John Mwangi]()
