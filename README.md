@@ -4,7 +4,7 @@
 ## Built By [John Mwangi](https://picsjonesapp.herokuapp.com/)
 
 ## Description
-This is an application made by the use of django framework, that enable user to upload image allocate it, give it description, deleting and making other necessary changes.
+This is an application made by the use of django framework, that enable user to view uploaded photos their location,descrption and copy link to the image or to share.
 
 ## User Stories
 These are the behaviours/features that the application implements for use by a user.
