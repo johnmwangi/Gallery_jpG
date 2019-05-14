@@ -1,7 +1,7 @@
 # Straightoutta Gallery
 
 
-## Built By [John Mwangi]()
+## Built By [John Mwangi](https://picsjonesapp.herokuapp.com/)
 
 ## Description
 This is an application made by the use of django framework, that enable user to upload image allocate it, give it description, deleting and making other necessary changes.
