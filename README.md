@@ -49,7 +49,7 @@ Admin should:
 * In your terminal:
 
         * git clone
-        * cd MyGallery
+        * cd Gallery_jpG
 
 ## Running the Application
 * Creating the virtual environment
