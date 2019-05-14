@@ -48,7 +48,7 @@ Admin should:
 ### Cloning
 * In your terminal:
 
-        * git clone
+        * git clone:(https://picsjonesapp.herokuapp.com/)
         * cd Gallery_jpG
 
 ## Running the Application
