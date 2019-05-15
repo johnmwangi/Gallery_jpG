@@ -31,7 +31,10 @@
 
       <div class="modal-body">
         <img class="card-img-top" class="img-responsive" src="{{image.image.url}}" size="100px200">
-        <h6>Category: {{image.description}}</h6>
+        {%autoescape on%}
+        <h6 style="color:black">description: {{image.description|safe}}   </h6>
+        {%endautoescape%}
+
         <h6>Location: {{image.location}}</h6>
 
         <!-- The button used to copy the text -->

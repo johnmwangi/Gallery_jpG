@@ -14,7 +14,7 @@ h2, h4{
 }
 
 p, h5 {
-  color:white;
+
   font-size: 20px;
   font-family: 'Abel', sans-serif;
 }
@@ -27,6 +27,7 @@ p, h5 {
 
 }
 
+
 body{
   background-image: url('/static/img/black.jpg');
   z-index: 0;
@@ -37,6 +38,5 @@ body{
 
 .modal-content {
   background-color: rgba(255,0,255,0.7;
-  text-decoration-color: white;
 
 }
