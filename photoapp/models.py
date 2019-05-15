@@ -27,6 +27,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def save_category(self):
+        self.save()
+
     @classmethod
     def all_categories(cls):
         categories=cls.objects.all()
